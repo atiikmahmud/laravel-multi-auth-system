@@ -6,11 +6,13 @@ use App\Http\Controllers\EditorController;
 use App\Http\Controllers\EmpController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EmployerController;
+use App\Http\Controllers\FormController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TestController;
 use App\Models\Employer;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +28,13 @@ Route::middleware(['auth', 'authAdmin'])->group(function () {
     Route::get('/admin-user-inert', [AdminController::class,    'insertUser'])->name('insertUser');
     Route::post('/admin-user-store',[AdminController::class,    'storeUser'])->name('adminUser');
     Route::get('/admin-user-list',  [AdminController::class,    'showUserList'])->name('adminUserList');
+
+    Route::get('/update-user-status/{id}', [AdminController::class, 'statusUpdate']);
+    Route::get('/edit-admin-user/{id}', [AdminController::class, 'edit']);
+    Route::post('/update-admin-user', [AdminController::class, 'update'])->name('updateAdmin');
+    Route::get('/delete-admin-user/{id}', [AdminController::class, 'delete']);
+
+
     Route::get('/add-employee',     [EmployeeController::class, 'addEmployee']);
     Route::get('/export-excel',     [EmployeeController::class, 'exportIntoExcel'])->name('excel');
     Route::get('/export-csv',       [EmployeeController::class, 'exportIntoCSV'])->name('csv');
@@ -54,6 +63,12 @@ Route::middleware(['auth', 'authAdmin'])->group(function () {
 
     //Yajra
     Route::get('/employer', [EmployerController::class, 'index']);
+
+    // Multi part form route
+    Route::get('/form', [FormController::class, 'index'])->name('multiform');
+
+    Route::get('/get-name', [TestController::class, 'getFirstLastName']);
+    Route::get('/addition', [TestController::class, 'addMath']);
 });
 
 /* Seller sector's all route is here */

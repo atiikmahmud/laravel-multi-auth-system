@@ -23,7 +23,7 @@
                 <div class="col-md-10 offset-md-1">
                     <div class="card">
                         <div class="card-header">
-                            Add User
+                            Update User Profile
                         </div>
                         <div class="card-body">
 
@@ -55,27 +55,49 @@
                             </div>
                             @enderror
 
-                            @if(Session::has('userInsert'))
+                            @if(Session::has('userUpdate'))
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                {{Session::get('userInsert')}}
+                                {{Session::get('userUpdate')}}
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                             @endif
                             
-                            <form action="{{ route('adminUser') }}" method="POST">
+                            <form action="{{ route('updateAdmin') }}" method="POST">
                                 @csrf
                                 <div class="row pb-3">
                                     <div class="col">
+
+                                        <input type="hidden" name="id" value="{{$user->id}}">
+
                                         <label for="inputEmail4" class="form-label">Name</label>
-                                        <input type="text" class="form-control" name="name" aria-label="name" required>
+                                        <input type="text" class="form-control" name="name" value="{{$user->name}}" aria-label="name" required>
                                     </div>
                                     <div class="col">
                                         <label for="inputState" class="form-label">User Type</label>
-                                        <select id="inputState" class="form-select" name="role" required>
-                                            <option selected>Choose...</option>
-                                            <option value="1">Admin</option>
+                                        <select id="inputState" class="form-select" name="role" value="{{ $user->role }}" required>
+                                            
+                                            {{-- @php
+                                                $userRole = $user->role;
+                                            @endphp
+
+                                            @if($userRole == 1)
+                                            <option value="1" selected>Admin</option>
                                             <option value="2">Seller</option>
                                             <option value="0">User</option>
+                                            @elseif($userRole == 2)
+                                            <option value="1">Admin</option>
+                                            <option value="2" selected>Seller</option>
+                                            <option value="0">User</option>
+                                            @elseif($userRole == 0)
+                                            <option value="1">Admin</option>
+                                            <option value="2">Seller</option>
+                                            <option value="0" selected>User</option>
+                                            @endif --}}
+                                            
+                                            @foreach($roles as $index =>$role)
+                                            <option value="{{$index}}" @if($user->role == $index) selected @endif>{{$role}}</option>
+                                            @endforeach
+
                                         </select>
                                     </div>
                                 </div>
@@ -83,14 +105,14 @@
                                 <div class="row pb-3">
                                     <div class="col">
                                         <label for="inputEmail4" class="form-label">Email Address</label>
-                                        <input type="email" class="form-control" name="email" aria-label="email" required>
+                                        <input type="email" class="form-control" name="email" value="{{$user->email}}" aria-label="email" required>
                                     </div>
                                     <div class="col">
                                         <label for="inputEmail4" class="form-label">Password</label>
-                                        <input type="password" class="form-control" name="password" aria-label="password" required>
+                                        <input type="password" class="form-control" name="password" value="password" aria-label="password" required>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary">Update</button>
                             </form>
                         </div>
                     </div>

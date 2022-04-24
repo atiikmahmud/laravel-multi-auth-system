@@ -18,9 +18,10 @@
 
                     @php
                     $role = Auth::user()->role;
+                    $status = Auth::user()->status;
                     @endphp
 
-                    @if($role == '1')
+                    @if($role == '1' && $status == "1")
                     
                     <x-jet-nav-link href="{{ route('insertUser') }}" :active="request()->routeIs('insertUser')">
                         {{ __('Add User') }}
@@ -30,16 +31,24 @@
                         {{ __('Users') }}
                     </x-jet-nav-link>
 
+                    <x-jet-nav-link href="{{ route('multiform') }}" :active="request()->routeIs('multiform')">
+                        {{ __('Multi Part Form') }}
+                    </x-jet-nav-link>
+
                     
                     
-                    @elseif($role == '2')
+                    @elseif($role == '2' && $status == "1")
                     
                     <!-- dasdsad -->
                     
-                    @else
+                    @elseif($role == '0' && $status == "1")
                     
                     <!--asdadssad  -->
-                    
+
+                    @else
+
+                    <!--asdadssad  -->
+
                     @endif
 
 

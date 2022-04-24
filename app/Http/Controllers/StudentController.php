@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class StudentController extends Controller
 {
@@ -33,7 +34,8 @@ class StudentController extends Controller
     public function students()
     {
         $students = Student::all();
-        return view('student.all-student', compact('students'));
+        //return view('student.all-student', compact('students'));
+        return Response::json($students);
     }
 
     //Student information edit

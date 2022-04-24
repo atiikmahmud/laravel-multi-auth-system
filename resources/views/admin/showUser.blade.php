@@ -26,6 +26,19 @@
                             All User
                         </div>
                         <div class="card-body">
+
+                            @if(Session::has('userDeleted'))
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                {{Session::get('userDeleted')}}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            @elseif(Session::has('statusUpdate'))
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                {{Session::get('statusUpdate')}}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            @endif
+
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
@@ -38,6 +51,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @if($users)
                                     @foreach($users as $user)
                                     <tr>
                                         <td>{{$user->id}}</td>
@@ -57,13 +71,21 @@
 
 
                                         <td>{{$user->email}}</td>
-                                        <td><button type="button" class="btn btn-success" onclick="return confirm('Are you sure to change this user active status ?')">Active</button></td>
+                                        <td><h5><a href="/update-user-status/{{ $user->id }}" type="button"  class="text-decoration-none badge rounded-pill @if($user->status == 1) bg-success @else bg-danger @endif" onclick="return confirm('Are you sure to change this user active status ?')">
+                                        @if($user->status == 1)
+                                        Active
+                                        @else
+                                        Disable
+                                        @endif
+                                        
+                                        </a></h5></td>
                                         <td style="width: 150px;">
-                                            <button type="button" class="btn btn-info ml-1">Edit</button>
-                                            <button type="button" class="btn btn-danger">Delete</button>
+                                            <a href="/edit-admin-user/{{ $user->id }}" type="button" class="btn btn-primary ml-1" onclick="return confirm('Are you edit this user profile ?')">Edit</a>
+                                            <a href="/delete-admin-user/{{ $user->id }}" type="button" class="btn btn-danger" onclick="return confirm('Are you sure delete this user ?')">Delete</a>
                                         </td>
                                     </tr>
                                     @endforeach
+                                    @endif
                                 </tbody>
                             </table>
                         </div>

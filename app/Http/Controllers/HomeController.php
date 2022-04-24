@@ -18,18 +18,22 @@ class HomeController extends Controller
     public function index()
     {
         $role = Auth::user()->role;
+        $status = Auth::user()->status;
 
-        if($role == '1')
+        if($role == '1' && $status == "1")
         {
             return view('admin.home');
         }
-        elseif($role == '2')
+        elseif($role == '2' && $status == "1")
         {
             return view('seller.home');
         }
-        else
+        elseif($role == '0' && $status == "1")
         {
             return view('user.home'); 
+        }
+        else{
+            return view('admin.disable');
         }
     }
     
