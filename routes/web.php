@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\DropzoneController;
 use App\Http\Controllers\EditorController;
 use App\Http\Controllers\EmpController;
@@ -47,6 +48,10 @@ Route::middleware(['auth', 'authAdmin'])->group(function () {
     Route::get('/dropzone',         [DropzoneController::class, 'dropzone']);
     Route::post('/dropzone-store',  [DropzoneController::class, 'dropZoneStore'])->name('dropzone.store');
     Route::get('/editor',           [EditorController::class,   'Editor']);
+
+    //Config Settings
+    Route::get('/config', [ConfigController::class, 'index'])->name('config.index');
+
 
     //CRUD 
     Route::get('/add-student',        [StudentController::class, 'addStudent']);
