@@ -13,13 +13,40 @@ class ImageController extends Controller
         return view('admin.resize-image');
     }
 
+    // public function resizeImageSubmit(Request $request)
+    // {      
+    //     $fileName = $request->file;
+    //     $imageExt = $fileName->getClientOriginalExtension();
+    //     $image = Image::make($fileName->getRealPath());
+    //     $imageName = time().'_v1.'.$imageExt;
+    //     $image->save(public_path('images/'.$imageName));
+
+    //     $imageName2 = time().'_v2.'.$imageExt;
+    //     $image->resize(150,150);
+    //     $image->save(public_path('images/'.$imageName2));
+        
+    //     return back()->with('uploaded', 'Images successfully uploaded !');
+    // }
+
     public function resizeImageSubmit(Request $request)
-    {
-        $image = $request->file;
-        $filename = $image->getClientOriginalName();
-        $image_resize = Image::make($image->getRealPath());
-        $image_resize->resize(300,300);
-        $image_resize->save(public_path('images/'.$filename));
-        return "Image has bees resized successfully!";
+    {      
+        if ($request->hasFile('files')) {
+  
+            foreach($request->file('files') as $file){
+                $fileName = $file;
+                $imageExt = $fileName->getClientOriginalExtension();
+                $image = Image::make($fileName->getRealPath());
+                $imageName = uniqid() . '_v1.' . $imageExt;
+                $image->save(public_path('images/' . $imageName));
+
+                $imageName2 = uniqid() . '_v2.' . $imageExt;
+                $image->resize(150, 150);
+                $image->save(public_path('images/' . $imageName2));
+            }
+      
+            return back()->with('uploaded', 'Images successfully uploaded !');
+        }
     }
 }
+
+  
