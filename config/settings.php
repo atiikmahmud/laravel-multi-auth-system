@@ -1,11 +1,7 @@
-<?php
-
-return[
-    'name' => 'Shajgoj',
-    'district' => 'Dhaka',
-    'country' => 'Bangladesh',
-    'dept' => 'Engineering',
+<?php 
+ return [ 
+ 'name' => 'Shajgoj Limited', 
+ 'district' => 'Dhaka', 
+ 'country' => 'Bangladesh', 
+ 'dept' => 'Engineering', 
 ];
-
-
-
