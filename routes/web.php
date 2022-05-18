@@ -51,6 +51,8 @@ Route::middleware(['auth', 'authAdmin'])->group(function () {
 
     //Config Settings
     Route::get('/config', [ConfigController::class, 'index'])->name('config.index');
+    Route::post('/config', [ConfigController::class, 'store'])->name('config.store');
+    Route::get('/config-view', [ConfigController::class, 'view'])->name('config.view');
 
 
     //CRUD 

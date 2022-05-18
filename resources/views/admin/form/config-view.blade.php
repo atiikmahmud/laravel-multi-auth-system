@@ -23,23 +23,23 @@
                             Config Settings
                         </div>
                         <div class="card-body">
-                            <form action="{{route('config.store')}}" method="POST">
+                            <form action="" method="POST">
                                 @csrf
-                                @foreach($config as $key => $value)
-                                    @if(is_array($value))
-                                        <div class="mb-3">
-                                            <label for="exampleFormControlInput1" class="form-label">{{ucfirst($key)}}</label>
-                                            @foreach($value as $data)
-                                            <input type="text" class="form-control mb-3" id="exampleFormControlInput1" name="{{$key}}[]" value="{{$data}}">
-                                            @endforeach
-                                        </div>
-                                    @else
-                                        <div class="mb-3">
-                                            <label for="exampleFormControlInput1" class="form-label">{{ucfirst($key)}}</label>
-                                            <input type="text" class="form-control mb-3" id="exampleFormControlInput1" name="{{$key}}" value="{{$value}}">
-                                        </div>
-                                    @endif
-                                @endforeach
+                                
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Name</label>
+                                    <input type="text" class="form-control mb-3" id="example1" name="" value="">
+                                    <input type="text" class="form-control mb-3" id="example2" name="" value="">
+                                    <input type="text" class="form-control mb-3" id="example3" name="" value="">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="exampleFormControlInput1" class="form-label">Value</label>
+                                    <input type="text" class="form-control mb-3" id="example4" name="" value="">
+                                    <input type="text" class="form-control mb-3" id="example5" name="" value="">
+                                    <input type="text" class="form-control mb-3" id="example6" name="" value="">
+                                </div>
+                               
                                 <button type="submit" class="btn btn-primary mt-1">Submit</button>
                             </form>
                         </div>
